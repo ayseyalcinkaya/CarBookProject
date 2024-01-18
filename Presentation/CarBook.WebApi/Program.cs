@@ -5,6 +5,7 @@ using CarBook.Application.Feautures.CQRS.Handlers.CarHandlers;
 using CarBook.Application.Feautures.CQRS.Handlers.CategoryHandlers;
 using CarBook.Application.Feautures.CQRS.Handlers.ContactHandlers;
 using CarBook.Application.Feautures.Mediator.Handlers.BlogHandlers;
+using CarBook.Application.Feautures.RepositoryPattern;
 using CarBook.Application.Interfaces;
 using CarBook.Application.Interfaces.BlogInterfaces;
 using CarBook.Application.Interfaces.CarInterfaces;
@@ -16,6 +17,7 @@ using CarBook.Persistance.Repositories;
 using CarBook.Persistance.Repositories.BlogRepositories;
 using CarBook.Persistance.Repositories.CarPricingRepositories;
 using CarBook.Persistance.Repositories.CarRepositories;
+using CarBook.Persistance.Repositories.CommentRepositories;
 using CarBook.Persistance.Repositories.TagCloudRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,7 @@ builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
 builder.Services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
 builder.Services.AddScoped(typeof(ICarPricingRepository), typeof(CarPricingRepository));
 builder.Services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepository));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
 
 
 builder.Services.AddScoped<GetAboutQueryHandler>();

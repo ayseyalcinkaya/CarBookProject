@@ -9,7 +9,6 @@ namespace CarBook.Dto.BlogDtos
     public class ResultAllBlogsWithAuthorDto
     {
 
-
         public int blogID { get; set; }
         public string title { get; set; }
         public string authorName { get; set; }
@@ -19,7 +18,8 @@ namespace CarBook.Dto.BlogDtos
         public DateTime createdDate { get; set; }
         public int categoryID { get; set; }
         public string Description { get; set; }
-
+        public string AuthorDescription { get; set; }
+        public string AuthorImageUrl { get; set; }
 
     }
 }
