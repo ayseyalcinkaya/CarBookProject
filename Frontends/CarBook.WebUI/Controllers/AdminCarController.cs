@@ -3,6 +3,7 @@ using CarBook.Dto.CarDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace CarBook.WebUI.Controllers
 {
@@ -42,6 +43,31 @@ namespace CarBook.WebUI.Controllers
                                                    Value = x.brandID.ToString()
                                                }).ToList();
             ViewBag.BrandValues = brandValues;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCar(CreateCarDto createCarDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData= JsonConvert.SerializeObject(createCarDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7073/api/Cars/", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> RemoveCar (int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:7073/api/Cars/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
     }
