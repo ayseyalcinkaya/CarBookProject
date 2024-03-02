@@ -47,6 +47,7 @@ namespace CarBook.WebUI.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> RemoveBrand(int id)
         {
             var client = _httpClientFactory.CreateClient();
